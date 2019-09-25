@@ -25,7 +25,19 @@ class ShopSingle extends Component {
   render() {
     return (
       <article>
-        {!this.state.isLoading && <ProductItem productInfo={this.state.data}></ProductItem>}
+        {!this.state.isLoading &&
+			<ProductItem
+				productInfo={this.state.data}
+				isMini={false}
+				productActions={
+					<>
+						<button className="button"><Link to="/">Continue shopping</Link></button>
+						<button className="button">Add to cart</button>
+						<button className="button"><Link to="/cart">Go to checkout</Link></button>
+					</>
+				}
+			></ProductItem>
+		}
         <Link to="/">Volver</Link>
       </article>
     );

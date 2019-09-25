@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import classNames from "classnames";
 import styles from "../styles/product-item.module.css";
 
 export default function ProductItem(props) {
-	const productInfo = props.productInfo;
-	const isMini = props.isMini;
+  const productInfo = props.productInfo;
+  const isMini = props.isMini;
+  const itemDetail = styles.itemDetail;
+  const finalClass = classNames(styles.item, { itemDetail: isMini });
 
-	return (
-    <article className={styles.item}>
+  return (
+    <article className={`${styles.item} ${!isMini && styles.itemDetail}`}>
       <img src={productInfo.picture} className={styles.item__image} />
       <section className={styles.item__info}>
         <h2>{productInfo.name}</h2>

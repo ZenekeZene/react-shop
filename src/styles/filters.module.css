@@ -1,0 +1,14 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  max-width: 17rem;
+  margin-left: auto;
+  padding: 1rem;
+  text-align: left;
+  box-sizing: border-box;
+
+}
+
+.filtersPrice {
+	margin-bottom: 1rem;
+}
