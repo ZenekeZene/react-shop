@@ -4,16 +4,24 @@ import ProductItem from "./ProductItem";
 import products from "../products";
 import styles from "../styles/gallery.module.css";
 
-export default function Gallery() {
+function filterProductsByPrice(rangePrice) {
+  return products.filter(product => {
+    const priceCleaned = parseFloat(product.price.replace("$", ""));
+    return priceCleaned > rangePrice.min && priceCleaned < rangePrice.max;
+  });
+}
+
+export default function Gallery(props) {
+  const productsFiltered = filterProductsByPrice(props.rangePrice);
   return (
     <article>
       <ol className={styles.gallery}>
-        {products.map((product, index) => (
+        {productsFiltered.map((product, index) => (
           <li key={product._id}>
             <Link
               to={{
                 pathname: `/shop-single/${product._id}`,
-				data: product
+                data: product
               }}
             >
               <ProductItem productInfo={product} isMini></ProductItem>
@@ -21,7 +29,7 @@ export default function Gallery() {
           </li>
         ))}
       </ol>
-      {products.length === 0 && (
+      {productsFiltered.length === 0 && (
         <p>
           Lo lamentamos, no hay productos con esas características&nbsp;&nbsp;🥺
         </p>
