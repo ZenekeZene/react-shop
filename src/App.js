@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
 import ShopSingle from "./pages/ShopSingle";
 import Header from "./components/Header";
+import "./styles/global.css";
 import "./App.css";
 
 function App() {

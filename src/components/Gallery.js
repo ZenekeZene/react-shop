@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import ProductItem from "./ProductItem";
 import products from "../products";
-console.log(products);
+import styles from "../styles/gallery.module.css";
 
 export default function Gallery() {
   return (
     <article>
-      <ol className="gallery">
+      <ol className={styles.gallery}>
         {products.map((product, index) => (
           <li key={product._id}>
             <Link
