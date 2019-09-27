@@ -48,7 +48,11 @@ class ClothingSizes extends React.Component {
       return size;
     });
     this.setState({ sizesSelected: sizesSelected });
-    this.props.handleChange(sizesSelected);
+    this.props.onChange(this.flatSizesChecked(sizesSelected));
+  }
+
+  flatSizesChecked(sizes) {
+    return sizes.filter(size => size.checked).flatMap(size => size.id);
   }
 
   render() {

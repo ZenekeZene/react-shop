@@ -4,19 +4,26 @@ import ProductItem from "./ProductItem";
 import products from "../products";
 import styles from "../styles/gallery.module.css";
 
-function filterProductsByPrice(rangePrice) {
-  return products.filter(product => {
-    const priceCleaned = parseFloat(product.price.replace("$", ""));
-    return priceCleaned > rangePrice.min && priceCleaned < rangePrice.max;
-  });
-}
+const filterByPrice = ({ price }, { rangePrice }) => {
+  const priceCleaned = parseFloat(price.replace("$", ""));
+  return priceCleaned > rangePrice.min && priceCleaned < rangePrice.max;
+};
+const filterBySize = ({ size }, { sizes }) =>
+  sizes.length === 0 || sizes.includes(size);
+
+const filterProductsByPriceAndSizes = rangePrice => sizes =>
+  products.filter(product =>
+    [filterBySize, filterByPrice].every(f => f(product, { rangePrice, sizes }))
+  );
 
 export default function Gallery(props) {
-  const productsFiltered = filterProductsByPrice(props.rangePrice);
+  const filteredProducts = filterProductsByPriceAndSizes(props.rangePrice)(
+    props.selectedSizes
+  );
   return (
     <article>
       <ol className={styles.gallery}>
-        {productsFiltered.map((product, index) => (
+        {filteredProducts.map(product => (
           <li key={product._id}>
             <Link
               to={{
@@ -29,7 +36,7 @@ export default function Gallery(props) {
           </li>
         ))}
       </ol>
-      {productsFiltered.length === 0 && (
+      {filteredProducts.length === 0 && (
         <p>
           Lo lamentamos, no hay productos con esas características&nbsp;&nbsp;🥺
         </p>

@@ -11,22 +11,32 @@ export default function HomePage() {
 		min: 5,
 		max: 10,
 	});
+
+	const [size, setSize] = useState([]);
+
+	function onHandleChange(e) {
+		setSize(e);
+	}
+
 	return (
-    <main className="page-home">
-      <article className={stylesFilters.filters}>
-        <section className={stylesFilters.filtersPrice}>
-          <p>Filter by price</p>
-          <InputRange
-            maxValue={100}
-            minValue={0}
-            formatLabel={value => `$${value}`}
-            value={rangePrice}
-            onChange={value => setRangePrice(value)}
-          />
-        </section>
-        <ClothingSizes typeInput="checkbox"></ClothingSizes>
-      </article>
-      <Gallery rangePrice={rangePrice}></Gallery>
-    </main>
-  );
+		<main className="page-home">
+			<article className={stylesFilters.filters}>
+				<section className={stylesFilters.filtersPrice}>
+					<p>Filter by price</p>
+					<InputRange
+						maxValue={100}
+						minValue={0}
+						formatLabel={value => `$${value}`}
+						value={rangePrice}
+						onChange={value => setRangePrice(value)}
+					/>
+					</section>
+					<ClothingSizes
+						typeInput="checkbox"
+						onChange={onHandleChange}
+					></ClothingSizes>
+			</article>
+			<Gallery rangePrice={rangePrice} selectedSizes={size}></Gallery>
+		</main>
+  	);
 }

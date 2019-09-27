@@ -12,7 +12,7 @@ export default function ProductItem(props) {
         <h2>{productInfo.name}</h2>
         <p>{productInfo.description_short}</p>
         {!isMini && <p>{productInfo.description}</p>}
-
+		<p>{productInfo.size}</p>
         <p className={styles.item__price}>{productInfo.price}</p>
         {props.productActions}
       </section>

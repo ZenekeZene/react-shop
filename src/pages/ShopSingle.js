@@ -71,7 +71,7 @@ class ShopSingle extends React.Component {
                 />
                 <ClothingSizes
                   typeInput="radio"
-                  handleChange={this.onHandleChange}
+                  onChange={this.onHandleChange}
                 ></ClothingSizes>
                 <button className="button">
                   <Link to="/">Continue shopping</Link>
