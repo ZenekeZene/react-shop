@@ -19,13 +19,10 @@ export default function HomePage() {
           <InputRange
             maxValue={100}
             minValue={0}
-            formatLabel={value => `${value} kg`}
+            formatLabel={value => `$${value}`}
             value={rangePrice}
             onChange={value => setRangePrice(value)}
           />
-          );
-          <span>-</span>
-          <span></span>
         </section>
         <ClothingSizes typeInput="checkbox"></ClothingSizes>
       </article>

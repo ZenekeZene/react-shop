@@ -1,26 +1,79 @@
-import React from 'react';
-import styles from '../styles/clothing-sizes.module.css';
+import React from "react";
+import _ from "lodash";
+import styles from "../styles/clothing-sizes.module.css";
 
-const ClothingSizes = (props) => {
-	return (
-		<section className={styles.clothingSizes}>
-			<p>Size</p>
-			<ol>
-				<li>
-					<input type={props.typeInput} value="small" id="small"/>
-					<label htmlFor="small">Small (2,319)</label>
-				</li>
-				<li>
-					<input type={props.typeInput} value="medium" id="medium"/>
-					<label htmlFor="medium">Medium (1,282)</label>
-				</li>
-				<li>
-					<input type={props.typeInput} value="large" id="large"/>
-					<label htmlFor="large">Large (1,392)</label>
-				</li>
-			</ol>
-		</section>
-	)
+class ClothingSizes extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      sizesSelected: [
+        {
+          id: "small",
+          name: "Small",
+          checked: false
+        },
+        {
+          id: "medium",
+          name: "Medium",
+          checked: false
+        },
+        {
+          id: "large",
+          name: "Large",
+          checked: false
+        }
+      ]
+    };
+  }
+
+  componentDidMount() {
+    if (this.props.typeInput === "radio") {
+      const sizesSelected = this.state.sizesSelected;
+      sizesSelected[1].checked = true;
+      this.setState({ sizesSelected });
+    }
+  }
+
+  handleChange(e) {
+    const id = e.target.value;
+    let sizesSelected = this.state.sizesSelected.map(size => {
+      if (this.props.typeInput === "radio") {
+        return (size.id === id
+          ? { ...size, checked: true }
+          : { ...size, checked: false });
+      } else if (this.props.typeInput === "checkbox") {
+        return (size.id === id ? { ...size, checked: !size.checked } : size);
+      }
+      return size;
+    });
+    this.setState({ sizesSelected: sizesSelected });
+    this.props.handleChange(sizesSelected);
+  }
+
+  render() {
+    return (
+      <section className={styles.clothingSizes}>
+        <p>Size</p>
+        <ol>
+          {this.state.sizesSelected.map((size, index) => (
+            <li key={index}>
+              <p>{this.state.sizesSelected[size]}</p>
+              <input
+                type={this.props.typeInput}
+                id={size}
+                defaultValue={size.id}
+                defaultChecked={size.checked}
+                name="clothes"
+                onChange={this.handleChange.bind(this)}
+              />
+              {size.name}
+            </li>
+          ))}
+        </ol>
+      </section>
+    );
+  }
 }
 
 export default ClothingSizes;
