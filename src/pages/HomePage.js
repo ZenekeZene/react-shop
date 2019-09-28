@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Gallery from "../components/Gallery";
 import products from "../products";
-import { Filters, filterByPrice, filterBySize } from "../components/Filters";
+import { filterByPrice, filterBySize, Filters } from "../components/Filters";
 
 const applyFilters = products => ({ rangePrice, sizes }) =>
   products.filter(product =>
