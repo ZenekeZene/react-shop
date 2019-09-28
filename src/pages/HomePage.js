@@ -11,7 +11,7 @@ const applyFilters = products => ({ rangePrice, sizes }) =>
 export default function HomePage() {
   const [rangePrice, setRangePrice] = useState({
     min: 5,
-    max: 10
+    max: 70
   });
 
   const [sizes, setSizes] = useState([]);
@@ -19,9 +19,9 @@ export default function HomePage() {
   return (
     <main className="page-home">
       <Filters
+		rangePrice={rangePrice}
         onChangePrice={rangePrice => setRangePrice(rangePrice)}
         onChangeSize={sizes => setSizes(sizes)}
-		rangePrice={rangePrice}
       ></Filters>
       <Gallery
         products={applyFilters(products)({ rangePrice, sizes })}

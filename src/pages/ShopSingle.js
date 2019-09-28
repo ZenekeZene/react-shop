@@ -8,13 +8,11 @@ class ShopSingle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productInfoinfoProduct: null,
+      productInfo: null,
       isLoading: true,
       quantity: 0,
-	  size: 'medium',
+      size: "medium"
     };
-
-	this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
@@ -48,11 +46,6 @@ class ShopSingle extends React.Component {
     }
   }
 
-  onChange(e) {
-	const size = e.filter(size => size.checked);
-	this.setState({ size: size[0].id });
-  }
-
   render() {
     return (
       <article>
@@ -66,11 +59,12 @@ class ShopSingle extends React.Component {
                   type="number"
                   min="0"
                   value={this.state.quantity}
-                  onChange={this.handleChange.bind(this)}
+                  onChange={e => this.setState({ quantity: e.target.value })}
                 />
                 <ClothingSizes
                   typeInput="radio"
-                  onChange={this.onChange}
+				  defaultSize={this.state.defaultSize}
+                  onChange={size => this.setState({ size })}
                 ></ClothingSizes>
                 <button className="button">
                   <Link to="/">Continue shopping</Link>

@@ -3,7 +3,6 @@ import _ from "lodash";
 import styles from "../styles/clothing-sizes.module.css";
 
 class ClothingSizes extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -11,12 +10,12 @@ class ClothingSizes extends React.Component {
         {
           id: "small",
           name: "Small",
-          checked: false
+          checked: true
         },
         {
           id: "medium",
           name: "Medium",
-          checked: false
+          checked: true
         },
         {
           id: "large",
@@ -27,26 +26,25 @@ class ClothingSizes extends React.Component {
     };
   }
 
-  componentDidMount() {
-    if (this.props.typeInput === "radio") {
-      const sizesSelected = this.state.sizesSelected;
-      sizesSelected[1].checked = true;
-      this.setState({ sizesSelected });
-    }
+  componentWillMount() {
+    this.props.onChange(this.flatSizesChecked(this.state.sizesSelected));
   }
 
   handleChange(e) {
     const id = e.target.value;
-    let sizesSelected = this.state.sizesSelected.map(size => {
-      if (this.props.typeInput === "radio") {
-        return (size.id === id
+    let sizesSelected;
+    if (this.props.typeInput === "radio") {
+      sizesSelected = this.state.sizesSelected.map(size =>
+        size.id === id
           ? { ...size, checked: true }
-          : { ...size, checked: false });
-      } else if (this.props.typeInput === "checkbox") {
-        return (size.id === id ? { ...size, checked: !size.checked } : size);
-      }
-      return size;
-    });
+          : { ...size, checked: false }
+      );
+    } else if (this.props.typeInput === "checkbox") {
+      sizesSelected = this.state.sizesSelected.map(size =>
+        size.id === id ? { ...size, checked: !size.checked } : size
+      );
+    }
+
     this.setState({ sizesSelected: sizesSelected });
     this.props.onChange(this.flatSizesChecked(sizesSelected));
   }
