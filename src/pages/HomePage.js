@@ -19,7 +19,7 @@ export default function HomePage() {
   return (
     <main className="page-home">
       <Filters
-		rangePrice={rangePrice}
+        rangePrice={rangePrice}
         onChangePrice={rangePrice => setRangePrice(rangePrice)}
         onChangeSize={sizes => setSizes(sizes)}
       ></Filters>

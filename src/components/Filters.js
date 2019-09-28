@@ -11,10 +11,9 @@ const filterByPrice = ({ price }, { rangePrice }) => {
 const filterBySize = ({ size }, { sizes }) =>
   sizes.length === 0 || sizes.includes(size);
 
-export { filterByPrice, filterBySize }
+export { filterByPrice, filterBySize };
 
 export function Filters(props) {
-
   return (
     <article className={stylesFilters.filters}>
       <section className={stylesFilters.filtersPrice}>

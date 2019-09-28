@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import styles from '../styles/cart.module.css';
+import styles from "../styles/cart.module.css";
 
 export default function CartPage() {
   return (

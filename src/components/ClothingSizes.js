@@ -30,7 +30,7 @@ class ClothingSizes extends React.Component {
     this.props.onChange(this.flatSizesChecked(this.state.sizesSelected));
   }
 
-  handleChange({target}) {
+  handleChange({ target }) {
     const id = target.value;
     let sizesSelected;
     if (this.props.typeInput === "radio") {

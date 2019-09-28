@@ -4,7 +4,6 @@ import ProductItem from "./ProductItem";
 import styles from "../styles/gallery.module.css";
 
 export default function Gallery(props) {
-  
   return (
     <article>
       <ol className={styles.gallery}>

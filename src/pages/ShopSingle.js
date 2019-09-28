@@ -63,7 +63,7 @@ class ShopSingle extends React.Component {
                 />
                 <ClothingSizes
                   typeInput="radio"
-				  defaultSize={this.state.defaultSize}
+                  defaultSize={this.state.defaultSize}
                   onChange={size => this.setState({ size })}
                 ></ClothingSizes>
                 <button className="button">
