@@ -1,42 +1,31 @@
-import React, { useState } from 'react';
-import InputRange from "react-input-range";
-import 'react-input-range/lib/css/index.css';
+import React, { useState } from "react";
 import Gallery from "../components/Gallery";
-import stylesFilters from "../styles/filters.module.css";
-import ClothingSizes from "../components/ClothingSizes";
+import products from "../products";
+import { Filters, filterByPrice, filterBySize } from "../components/Filters";
+
+const applyFilters = products => ({ rangePrice, sizes }) =>
+  products.filter(product =>
+    [filterBySize, filterByPrice].every(f => f(product, { rangePrice, sizes }))
+  );
 
 export default function HomePage() {
-	
-	const [rangePrice, setRangePrice] = useState({
-		min: 5,
-		max: 10,
-	});
+  const [rangePrice, setRangePrice] = useState({
+    min: 5,
+    max: 10
+  });
 
-	const [size, setSize] = useState([]);
+  const [sizes, setSizes] = useState([]);
 
-	function onHandleChange(e) {
-		setSize(e);
-	}
-
-	return (
-		<main className="page-home">
-			<article className={stylesFilters.filters}>
-				<section className={stylesFilters.filtersPrice}>
-					<p>Filter by price</p>
-					<InputRange
-						maxValue={100}
-						minValue={0}
-						formatLabel={value => `$${value}`}
-						value={rangePrice}
-						onChange={value => setRangePrice(value)}
-					/>
-					</section>
-					<ClothingSizes
-						typeInput="checkbox"
-						onChange={onHandleChange}
-					></ClothingSizes>
-			</article>
-			<Gallery rangePrice={rangePrice} selectedSizes={size}></Gallery>
-		</main>
-  	);
+  return (
+    <main className="page-home">
+      <Filters
+        onChangePrice={rangePrice => setRangePrice(rangePrice)}
+        onChangeSize={sizes => setSizes(sizes)}
+		rangePrice={rangePrice}
+      ></Filters>
+      <Gallery
+        products={applyFilters(products)({ rangePrice, sizes })}
+      ></Gallery>
+    </main>
+  );
 }

@@ -14,7 +14,7 @@ class ShopSingle extends React.Component {
 	  size: 'medium',
     };
 
-	this.onHandleChange = this.onHandleChange.bind(this);
+	this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
@@ -48,9 +48,8 @@ class ShopSingle extends React.Component {
     }
   }
 
-  onHandleChange(e) {
+  onChange(e) {
 	const size = e.filter(size => size.checked);
-	console.log(size[0].id);
 	this.setState({ size: size[0].id });
   }
 
@@ -71,7 +70,7 @@ class ShopSingle extends React.Component {
                 />
                 <ClothingSizes
                   typeInput="radio"
-                  onChange={this.onHandleChange}
+                  onChange={this.onChange}
                 ></ClothingSizes>
                 <button className="button">
                   <Link to="/">Continue shopping</Link>
