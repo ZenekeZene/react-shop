@@ -1,17 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import ProductItem from "../components/ProductItem";
 import ClothingSizes from "../components/ClothingSizes";
 import { getProductByIdFromCloud } from "../api";
+import { CartContext, addItemOnCart } from "../CartContext";
 
 class ShopSingle extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
       productInfo: null,
       isLoading: true,
       quantity: 0,
-      size: "medium"
+      size: ""
     };
   }
 
@@ -37,6 +39,12 @@ class ShopSingle extends React.Component {
       const quantity = this.state.quantity;
       this.setState({ quantity: 0 });
       console.log("Añadimos el producto.");
+	  console.log(this.context);
+      addItemOnCart(this.context, {
+        product: this.state.productInfo,
+        quantity,
+        size: this.state.size[0]
+      });
       /* this.addItemOnCart({
 				product: this.productInfo,
 				quantity,
@@ -59,12 +67,13 @@ class ShopSingle extends React.Component {
                   type="number"
                   min="0"
                   value={this.state.quantity}
-                  onChange={e => this.setState({ quantity: e.target.value })}
+                  onChange={e =>
+                    this.setState({ quantity: Number(e.target.value) })
+                  }
                 />
                 <ClothingSizes
                   typeInput="radio"
-                  defaultSize={this.state.defaultSize}
-                  onChange={size => this.setState({ size })}
+                  onChange={sizes => this.setState({ size: sizes })}
                 ></ClothingSizes>
                 <button className="button">
                   <Link to="/">Continue shopping</Link>
@@ -87,5 +96,5 @@ class ShopSingle extends React.Component {
     );
   }
 }
-
+ShopSingle.contextType = CartContext;
 export default ShopSingle;

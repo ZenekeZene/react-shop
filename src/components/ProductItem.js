@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import styles from "../styles/product-item.module.css";
 
 export default function ProductItem(props) {
@@ -7,7 +7,7 @@ export default function ProductItem(props) {
 
   return (
     <article className={`${styles.item} ${!isMini && styles.itemDetail}`}>
-      <img src={productInfo.picture} className={styles.item__image} />
+      <img src={productInfo.picture} className={styles.item__image} alt={productInfo.description_short}/>
       <section className={styles.item__info}>
         <h2>{productInfo.name}</h2>
         <p>{productInfo.description_short}</p>

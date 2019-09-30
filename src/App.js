@@ -6,18 +6,27 @@ import ShopSingle from "./pages/ShopSingle";
 import Header from "./components/Header";
 import "./styles/global.css";
 import "./App.css";
+import { CartProvider } from "./CartContext";
 
-function App() {
-  return (
-    <>
-      <Header></Header>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/cart" component={CartPage} />
-        <Route path="/shop-single/:id" component={ShopSingle} />
-      </Switch>
-    </>
-  );
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cart: []
+    };
+  }
+  render() {
+    return (
+      <CartProvider value={this.state.cart}>
+        <Header></Header>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/cart" component={CartPage} />
+          <Route path="/shop-single/:id" component={ShopSingle} />
+        </Switch>
+      </CartProvider>
+    );
+  }
 }
 
 export default App;

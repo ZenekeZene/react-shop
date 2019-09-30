@@ -1,5 +1,4 @@
 import React from "react";
-import _ from "lodash";
 import styles from "../styles/clothing-sizes.module.css";
 
 class ClothingSizes extends React.Component {
@@ -10,7 +9,7 @@ class ClothingSizes extends React.Component {
         {
           id: "small",
           name: "Small",
-          checked: true
+          checked: false
         },
         {
           id: "medium",
