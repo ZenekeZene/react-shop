@@ -19,10 +19,7 @@ function addItemOnCart(state, payload) {
 }
 
 function removeItemOnCart(state, payload) {
-	console.log(state);
-	console.log(payload);
-	state = state.filter(item => item.product._id != payload.id);
-	console.log(state);
+	return state.filter(item => item.product._id != payload.id && item.size !== payload.size);
 }
 
 export {

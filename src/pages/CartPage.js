@@ -8,6 +8,14 @@ class CartPage extends React.Component {
     super(props);
     this.removeItemOnCart = removeItemOnCart.bind(this);
     this.calculatePriceTotalItem = this.calculatePriceTotalItem.bind(this);
+    const cart = this.context;
+    this.state = {
+      cart: []
+    }
+  }
+
+  componentWillMount() {
+    this.setState({cart: this.context});
   }
 
   calculatePriceTotalItem(price, quantity) {
@@ -26,9 +34,8 @@ class CartPage extends React.Component {
             <span>Total</span>
             <span>Remove</span>
           </section>
-          <CartContext.Consumer>
-            {cart =>
-              cart.map((item, index) => (
+            {
+              this.state.cart.map((item, index) => (
                 <section key={index}>
                   <span>
                     <img src={item.product.picture} />
@@ -43,16 +50,13 @@ class CartPage extends React.Component {
                     )}
                   </span>
                   <span
-                    onClick={() => this.removeItemOnCart(cart, {
-                      id: item.product._id
-                    })}
+                    onClick={() => this.setState({cart: this.removeItemOnCart(this.state.cart, {id: item.product._id, size: item.size})})}
                   >
                     X
                   </span>
                 </section>
               ))
             }
-          </CartContext.Consumer>
         </article>
         <button className="button">
           <Link to="/">Continue shopping</Link>

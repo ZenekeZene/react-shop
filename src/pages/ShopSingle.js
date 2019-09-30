@@ -38,19 +38,11 @@ class ShopSingle extends React.Component {
     if (this.state.quantity > 0) {
       const quantity = this.state.quantity;
       this.setState({ quantity: 0 });
-      console.log("Añadimos el producto.");
-	  console.log(this.context);
       addItemOnCart(this.context, {
         product: this.state.productInfo,
         quantity,
         size: this.state.size[0]
       });
-      /* this.addItemOnCart({
-				product: this.productInfo,
-				quantity,
-				size: this.size[0]
-			});
-		*/
     }
   }
 

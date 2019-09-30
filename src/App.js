@@ -11,13 +11,10 @@ import { CartProvider } from "./CartContext";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      cart: []
-    };
   }
   render() {
     return (
-      <CartProvider value={this.state.cart}>
+      <CartProvider value={[]}>
         <Header></Header>
         <Switch>
           <Route exact path="/" component={HomePage} />
