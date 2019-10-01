@@ -7,22 +7,18 @@
   padding: 0;
   list-style: none;
 
-
-}
-
-@media (max-width: 740px) {
-	.gallery {
+	@media (max-width: 740px) {
 		grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
 	}
-}
 
-.gallery li {
-    position: relative;
-}
+	li {
+    	position: relative;
 
-.gallery li:hover img {
-	transform: scale(1.02);
-	transition: all 250ms ease-in-out;
+		&:hover img {
+			transform: scale(1.02);
+			transition: all 250ms ease-in-out;
+		}
+	}
 }
 
 .link {

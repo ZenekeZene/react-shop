@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ProductItem from "./ProductItem";
-import styles from "../styles/gallery.module.css";
+import styles from "../styles/gallery.module.scss";
 
 export default function Gallery(props) {
   return (
@@ -10,6 +10,7 @@ export default function Gallery(props) {
         {props.products.map(product => (
           <li key={product._id}>
             <Link
+			  className={styles.link}
               to={{
                 pathname: `/shop-single/${product._id}`,
                 data: product

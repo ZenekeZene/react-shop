@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styles from "../styles/cart.module.css";
+import styles from "../styles/cart.module.scss";
 import { CartContext, removeItemOnCart } from "../CartContext";
 
 class CartPage extends React.Component {

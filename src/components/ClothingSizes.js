@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/clothing-sizes.module.css";
+import styles from "../styles/clothing-sizes.module.scss";
 
 class ClothingSizes extends React.Component {
   constructor(props) {
@@ -68,7 +68,7 @@ class ClothingSizes extends React.Component {
                 name="clothes"
                 onChange={this.handleChange.bind(this)}
               />
-              {size.name}
+              <label htmlFor={size}>{size.name}</label>
             </li>
           ))}
         </ol>

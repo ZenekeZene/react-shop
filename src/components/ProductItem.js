@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/product-item.module.css";
+import styles from "../styles/product-item.module.scss";
 
 export default function ProductItem(props) {
   const productInfo = props.productInfo;
