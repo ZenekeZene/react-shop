@@ -8,7 +8,6 @@ class CartPage extends React.Component {
     super(props);
     this.removeItemOnCart = removeItemOnCart.bind(this);
     this.calculatePriceTotalItem = this.calculatePriceTotalItem.bind(this);
-    const cart = this.context;
     this.state = {
       cart: []
     }
@@ -38,7 +37,7 @@ class CartPage extends React.Component {
               this.state.cart.map((item, index) => (
                 <section key={index}>
                   <span>
-                    <img src={item.product.picture} />
+                    <img src={item.product.picture} alt={item.product.short_description}/>
                   </span>
                   <span>{item.product.name}</span>
                   <span>{item.product.price}</span>

@@ -8,7 +8,10 @@ const CartConsumer = CartContext.Consumer;
 function addItemOnCart(state, payload) {
   let isDuplicated = false;
   state.forEach(item => {
-    if (item.product._id === payload.product._id && item.product.size != payload.product.size) {
+    if (
+      item.product._id === payload.product._id &&
+      item.product.size !== payload.product.size
+    ) {
       item.quantity += payload.quantity;
       isDuplicated = true;
     }
@@ -19,7 +22,9 @@ function addItemOnCart(state, payload) {
 }
 
 function removeItemOnCart(state, payload) {
-	return state.filter(item => item.product._id != payload.id && item.size !== payload.size);
+  return state.filter(
+    item => item.product._id !== payload.id && item.size !== payload.size
+  );
 }
 
 export {

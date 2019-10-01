@@ -7,11 +7,7 @@ import Header from "./components/Header";
 import "./styles/global.scss";
 import { CartProvider } from "./CartContext";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
+function App() {
     return (
       <CartProvider value={[]}>
         <Header></Header>
@@ -22,7 +18,6 @@ class App extends React.Component {
         </Switch>
       </CartProvider>
     );
-  }
 }
 
 export default App;
