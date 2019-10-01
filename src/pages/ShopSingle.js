@@ -1,87 +1,87 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import ProductItem from "../components/ProductItem";
-import ClothingSizes from "../components/ClothingSizes";
-import { getProductByIdFromCloud } from "../api";
-import { CartContext, addItemOnCart } from "../CartContext";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import ProductItem from '../components/ProductItem';
+import ClothingSizes from '../components/ClothingSizes';
+import getProductByIdFromCloud from '../api';
+import { CartContext, addItemOnCart } from '../CartContext';
 
 class ShopSingle extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       productInfo: null,
       isLoading: true,
       quantity: 0,
-      size: ""
+      size: '',
     };
   }
 
   componentDidMount() {
-    this.setState({ productInfo: this.props.location.data });
-    if (!this.state.infoProduct) {
-      getProductByIdFromCloud({ id: this.props.match.params.id })
-        .then(response => {
+    const { location, match } = this.props;
+    const { infoProduct } = this.state;
+    this.setState({ productInfo: location.data });
+    if (!infoProduct) {
+      getProductByIdFromCloud({ id: match.params.id })
+        .then((response) => {
           this.setState({ productInfo: response.product, isLoading: false });
         })
-        .catch(error => {
-          console.error(error);
+        .catch((err) => {
+          throw Object.assign(new Error(err), {
+            type: 'getProductByIdFromCloud',
+          });
         });
     }
   }
 
-  handleChange(e) {
-    this.setState({ quantity: e.target.value });
-  }
-
   handAddToCart() {
-    if (this.state.quantity > 0) {
-      const quantity = this.state.quantity;
+    const { quantity, productInfo, size } = this.state;
+    if (quantity > 0) {
       this.setState({ quantity: 0 });
       addItemOnCart(this.context, {
-        product: this.state.productInfo,
+        product: productInfo,
         quantity,
-        size: this.state.size[0]
+        size: size[0],
       });
     }
   }
 
   render() {
+    const { isLoading, productInfo, quantity } = this.state;
     return (
       <article>
-        {!this.state.isLoading && (
+        {!isLoading && (
           <ProductItem
-            productInfo={this.state.productInfo}
+            productInfo={productInfo}
             isMini={false}
-            productActions={
+            productActions={(
               <>
                 <input
                   type="number"
                   min="0"
-                  value={this.state.quantity}
-                  onChange={e =>
-                    this.setState({ quantity: Number(e.target.value) })
-                  }
+                  value={quantity}
+                  onChange={(e) => this.setState({ quantity: Number(e.target.value) })}
                 />
                 <ClothingSizes
                   typeInput="radio"
-                  onChange={sizes => this.setState({ size: sizes })}
-                ></ClothingSizes>
-                <button className="button">
+                  onChange={(sizes) => this.setState({ size: sizes })}
+                />
+                <button className="button" type="button">
                   <Link to="/">Continue shopping</Link>
                 </button>
                 <button
                   className="button"
+                  type="button"
                   onClick={this.handAddToCart.bind(this)}
                 >
                   Add to cart
                 </button>
-                <button className="button">
+                <button className="button" type="button">
                   <Link to="/cart">Go to checkout</Link>
                 </button>
               </>
-            }
-          ></ProductItem>
+)}
+          />
         )}
         <Link to="/">Volver</Link>
       </article>
@@ -89,4 +89,18 @@ class ShopSingle extends React.Component {
   }
 }
 ShopSingle.contextType = CartContext;
+
+ShopSingle.propTypes = {
+  match: {
+    params: {
+      id: PropTypes.string,
+    }.isRequired,
+  }.isRequired,
+  location: {
+    data: PropTypes.shape({
+      _id: PropTypes.string,
+      name: PropTypes.string,
+    }).isRequired,
+  }.isRequired,
+};
 export default ShopSingle;

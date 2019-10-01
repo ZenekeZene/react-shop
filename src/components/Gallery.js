@@ -1,27 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import ProductItem from "./ProductItem";
-import styles from "../styles/gallery.module.scss";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import ProductItem from './ProductItem';
+import styles from '../styles/gallery.module.scss';
 
-export default function Gallery(props) {
+function Gallery(props) {
+  const { products } = props;
   return (
     <article>
       <ol className={styles.gallery}>
-        {props.products.map(product => (
+        {products.map((product) => (
           <li key={product._id}>
             <Link
-			  className={styles.link}
+              className={styles.link}
               to={{
                 pathname: `/shop-single/${product._id}`,
-                data: product
+                data: product,
               }}
             >
-              <ProductItem productInfo={product} isMini></ProductItem>
+              <ProductItem productInfo={product} isMini />
             </Link>
           </li>
         ))}
       </ol>
-      {props.products.length === 0 && (
+      {products.length === 0 && (
         <p>
           Lo lamentamos, no hay productos con esas características&nbsp;&nbsp;
           <span role="img" aria-label="sad-face">
@@ -32,3 +34,12 @@ export default function Gallery(props) {
     </article>
   );
 }
+Gallery.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.object),
+};
+
+Gallery.defaultProps = {
+  products: [],
+};
+
+export default Gallery;

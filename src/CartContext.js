@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const CartContext = React.createContext();
 
@@ -7,10 +7,11 @@ const CartConsumer = CartContext.Consumer;
 
 function addItemOnCart(state, payload) {
   let isDuplicated = false;
-  state.forEach(item => {
+  state.forEach((itemProp) => {
+    const item = itemProp;
     if (
-      item.product._id === payload.product._id &&
-      item.product.size !== payload.product.size
+      item.product._id === payload.product._id
+      && item.product.size !== payload.product.size
     ) {
       item.quantity += payload.quantity;
       isDuplicated = true;
@@ -23,7 +24,7 @@ function addItemOnCart(state, payload) {
 
 function removeItemOnCart(state, payload) {
   return state.filter(
-    item => item.product._id !== payload.id && item.size !== payload.size
+    (item) => item.product._id !== payload.id && item.size !== payload.size,
   );
 }
 
@@ -32,5 +33,5 @@ export {
   CartConsumer,
   CartContext,
   addItemOnCart,
-  removeItemOnCart
+  removeItemOnCart,
 };

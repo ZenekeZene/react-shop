@@ -1,17 +1,18 @@
-import React, { useState } from "react";
-import Gallery from "../components/Gallery";
-import products from "../products";
-import { filterByPrice, filterBySize, Filters } from "../components/Filters";
+import React, { useState } from 'react';
+import Gallery from '../components/Gallery';
+import products from '../products';
+import { filterByPrice, filterBySize, Filters } from '../components/Filters';
 
-const applyFilters = products => ({ rangePrice, sizes }) =>
-  products.filter(product =>
-    [filterBySize, filterByPrice].every(f => f(product, { rangePrice, sizes }))
-  );
+const applyFilters = (productsEntry) => ({ rangePrice, sizes }) => (
+  productsEntry.filter((product) => (
+    [filterBySize, filterByPrice].every((f) => (
+      f(product, { rangePrice, sizes })))
+  )));
 
 export default function HomePage() {
   const [rangePrice, setRangePrice] = useState({
     min: 5,
-    max: 70
+    max: 70,
   });
 
   const [sizes, setSizes] = useState([]);
@@ -20,12 +21,10 @@ export default function HomePage() {
     <main className="page-home">
       <Filters
         rangePrice={rangePrice}
-        onChangePrice={rangePrice => setRangePrice(rangePrice)}
-        onChangeSize={sizes => setSizes(sizes)}
-      ></Filters>
-      <Gallery
-        products={applyFilters(products)({ rangePrice, sizes })}
-      ></Gallery>
+        onChangePrice={(changedRangePrice) => setRangePrice(changedRangePrice)}
+        onChangeSize={(changedSizes) => setSizes(changedSizes)}
+      />
+      <Gallery products={applyFilters(products)({ rangePrice, sizes })} />
     </main>
   );
 }
