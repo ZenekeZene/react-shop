@@ -12,31 +12,49 @@
 
   &__image {
     width: 100%;
+    height: auto;
     max-width: 320px;
     border-radius: 4px;
   }
 
-  $self: &;
-
-  &#{$self}Detail {
-    display: flex;
-
-	#{$self}__info {
-		padding: 1rem;
-	}
-
-    #{$self}__image {
-      max-width: 50vw;
-    }
+  &__size {
+    position: absolute;
+    right: 1rem;
+    bottom: 2rem;
+    padding: 0.3rem 0.8rem;
+    color: #2f2f2f;
+    background-color: #f4f4f4;
+    font-size: 0.7rem;
+    border-radius: 4px;
   }
 
   &__price {
     font-weight: 700;
   }
 
-  &__size {
-    padding: 0.1rem 0.8rem;
-    color: #2f2f2f;
+  $self: &;
+
+  &#{$self}Detail {
+    display: flex;
+    align-items: flex-start;
+
+    #{$self}__info {
+      padding: 1rem;
+    }
+
+    #{$self}__image {
+      max-width: 50vw;
+      margin-top: 1rem;
+    }
+
+    section {
+      margin-bottom: 1rem;
+    }
+  }
+
+  p,
+  input[type='number'] {
+    margin-bottom: 1rem;
   }
 }
 

@@ -1,0 +1,21 @@
+@media screen and (max-width: 35rem) {
+	.page-shop-single {
+
+		.product-item {
+			flex-direction: column;
+
+			img {
+				margin: 0 auto;
+			}
+
+			h2,
+			p {
+				text-align: center;
+			}
+
+			h2 {
+				margin-bottom: 1rem;
+			}
+		}
+	}
+}

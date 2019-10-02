@@ -30,12 +30,6 @@ class ClothingSizes extends React.Component {
     };
   }
 
-  componentWillMount() {
-    const { onChange } = this.props;
-    const { sizesSelected } = this.state;
-    onChange(flatSizesChecked(sizesSelected));
-  }
-
   handleChange({ target }) {
     const id = target.value;
     const { sizesSelected } = this.state;
@@ -52,7 +46,7 @@ class ClothingSizes extends React.Component {
     }
 
     this.setState({ sizesSelected: newSizesSelected });
-    onChange(this.flatSizesChecked(newSizesSelected));
+    onChange(flatSizesChecked(newSizesSelected));
   }
 
   render() {
@@ -65,7 +59,6 @@ class ClothingSizes extends React.Component {
         <ol>
           {sizesSelected.map((size) => (
             <li key={size.id}>
-              <p>{sizesSelected[size]}</p>
               <input
                 type={typeInput}
                 id={size}

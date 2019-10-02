@@ -1,0 +1,36 @@
+
+button {
+	margin: 1rem 1rem 0 0;
+	padding: 1rem;
+	font-size: 1rem;
+	background-color: white;
+	border-radius: 4px;
+	box-shadow: 0 0 5px 1px rgba(128, 128, 128, 0.18);
+
+	a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	& + a {
+		display: block;
+	}
+
+	&.--primary {
+		color: white;
+		background-color: var(--color-primary);
+
+		&-100 {
+			background-color: var(--color-primary-100);
+		}
+
+		&-200 {
+			background-color: var(--color-primary-200);
+		}
+	}
+	
+	&.--secondary {
+		color: white;
+		background-color:var(--color-secondary);
+	}
+}
